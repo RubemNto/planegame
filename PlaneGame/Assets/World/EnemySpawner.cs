@@ -23,7 +23,10 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int spawn = 0; spawn < spawnsCount; spawn++)
             {
-                Vector3 pos = new Vector3(Random.Range(minMaxHorizontal.x, minMaxHorizontal.y), Random.Range(minMaxVertical.x, minMaxVertical.y), transform.position.z);
+                Vector3 pos = new Vector3(
+                    transform.position.x,
+                    transform.position.y, transform.position.z) + transform.right * Random.Range(minMaxHorizontal.x, minMaxHorizontal.y);
+                pos += transform.forward * Random.Range(-5, 5);
                 Instantiate(enemyPrefab, pos, transform.rotation);
             }
             _time = timeBetweenSpawns;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5795564899959747901}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -1, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6334104985741673445}
   m_Father: {fileID: 0}
@@ -65,9 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5795564899959747898}
-  maxSpeed: 50
-  acceleration: 20
-  target: {fileID: 0}
+  maxSpeed: 20
+  acceleration: 8
 --- !u!1001 &5795564898697389070
 PrefabInstance:
   m_ObjectHideFlags: 0
