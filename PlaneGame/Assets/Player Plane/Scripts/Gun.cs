@@ -12,34 +12,52 @@ public class Gun : MonoBehaviour
     private float _time;
     public KeyCode shootKey;
 
+    public bool canShoot;
+    public bool isAutomatic;
+
     private void Start()
     {
         _time = 0;
     }
 
+    void CreateBullet()
+    {
+        Instantiate(bullet,
+        bulletSpawn.position + new Vector3(
+            Random.Range(minMaxHorizontalOffset.x, minMaxHorizontalOffset.y),
+            Random.Range(minMaxVerticalOffset.x, minMaxVerticalOffset.y),
+            0),
+            bulletSpawn.rotation);
+    }
+
     private void Update()
     {
-        if (Input.GetKey(shootKey))
+        if (canShoot)
         {
-            if (_time <= 0)
+            if (isAutomatic)
             {
-                Instantiate(
-                    bullet,
-                    bulletSpawn.position + new Vector3(
-                                            Random.Range(minMaxHorizontalOffset.x, minMaxHorizontalOffset.y),
-                                            Random.Range(minMaxVerticalOffset.x, minMaxVerticalOffset.y),
-                                            0),
-                    bulletSpawn.rotation);
-                _time = timeBetweenShots;
+                if (_time <= 0)
+                {
+                    CreateBullet();
+                    _time = timeBetweenShots;
+                }
             }
             else
             {
-                _time -= Time.deltaTime;
+                if (Input.GetKey(shootKey))
+                {
+                    if (_time <= 0)
+                    {
+                        CreateBullet();
+                        _time = timeBetweenShots;
+                    }
+                }
+                else
+                {
+                    _time = 0;
+                }
             }
-        }
-        else
-        {
-            _time = 0;
+            _time -= Time.deltaTime;
         }
     }
 }

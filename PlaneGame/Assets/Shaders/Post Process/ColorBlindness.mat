@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 123c61d78955ac841b8a532686fbbf22, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
-  - _NORMAL_ON
+  - _DEUTERANOPIA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -28,8 +28,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Achromatopsia: 0
-    - _Deuteranopia: 0
-    - _Normal: 1
+    - _Deuteranopia: 1
+    - _Normal: 0
     - _Pratanopia: 0
     - _Tritanopia: 0
     m_Colors: []

@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        Destroy(gameObject, 10);
         _velocity = Vector3.zero;
         // _target = GameObject.FindGameObjectsWithTag("Player")[0].transform;
     }

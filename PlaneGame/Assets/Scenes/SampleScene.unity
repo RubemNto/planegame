@@ -142,6 +142,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minMaxHorizontal: {x: -12, y: 12}
   minMaxVertical: {x: -7, y: 7}
+--- !u!114 &195958192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195958182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d03a8d628fa2f653a46bd94d379e472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 5
+  startHP: 5
 --- !u!1 &289286706
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +423,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7263092297139353242, guid: 1daaf7ada9692d4f49bb6cfbb885acc3, type: 3}
+      propertyPath: canShoot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263092297139353242, guid: 1daaf7ada9692d4f49bb6cfbb885acc3, type: 3}
+      propertyPath: isAutomatic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1daaf7ada9692d4f49bb6cfbb885acc3, type: 3}
 --- !u!1 &963194225
@@ -422,6 +444,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194230}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -495,6 +519,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22829c4aa6d8398db73ff48f5f4e95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 5874cdf21cf170929af50daed5166131, type: 2}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c9ebc214b0141c6a6ecf1e7443f3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloomShader: {fileID: 4800000, guid: 926e8db920ab84661b115e2bdbc8199b, type: 3}
+  intensity: 2
+  iterations: 4
+  threshold: 1
+  softThreshold: 0.5
+  debug: 0
 --- !u!1 &1757014134
 GameObject:
   m_ObjectHideFlags: 0

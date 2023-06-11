@@ -27,7 +27,8 @@ public class EnemySpawner : MonoBehaviour
                     transform.position.x,
                     transform.position.y, transform.position.z) + transform.right * Random.Range(minMaxHorizontal.x, minMaxHorizontal.y);
                 pos += transform.forward * Random.Range(-5, 5);
-                Instantiate(enemyPrefab, pos, transform.rotation);
+                var enemyInstance = Instantiate(enemyPrefab, pos, transform.rotation);
+                enemyInstance.GetComponent<Gun>().canShoot = Random.Range(1.0f, 100.0f) > 90.0f ? true : false;
             }
             _time = timeBetweenSpawns;
         }
