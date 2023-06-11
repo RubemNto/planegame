@@ -3,11 +3,11 @@ Shader "Hidden/ColorBlindness"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        [Toggle] _Normal ("       Normal", Int) = 0
-        [Toggle] _Achromatopsia ("Achromatopsia", Int) = 0
-        [Toggle] _Tritanopia ("   Tritanopia", Int) = 0
-        [Toggle] _Pratanopia ("   Pratanopia", Int) = 0
-        [Toggle] _Deuteranopia (" Deuteranopia", Int) = 0
+        [Toggle] _Normal ("Normal", Int) = 0
+        [Toggle] _Achromatopia ("Achromatopia", Int) = 0
+        [Toggle] _Tritanopia ("Tritanopia", Int) = 0
+        [Toggle] _Pratanopia ("Pratanopia", Int) = 0
+        [Toggle] _Deuteranopia ("Deuteranopia", Int) = 0
     }
     SubShader
     {
@@ -45,7 +45,7 @@ Shader "Hidden/ColorBlindness"
             sampler2D _MainTex;
 
             int _Normal;
-            int _Achromatopsia;
+            int _Achromatopia;
             int _Tritanopia;
             int _Pratanopia;
             int _Deuteranopia;
@@ -99,7 +99,7 @@ Shader "Hidden/ColorBlindness"
                 return col;
             }
 
-            fixed4 Achromatopsia (fixed4 col){
+            fixed4 Achromatopia (fixed4 col){
                 //Traditional grayscale
                 // return (col.r + col.g + col.b)/3.0;
 
@@ -148,8 +148,8 @@ Shader "Hidden/ColorBlindness"
                     return Normal(col);
                 }
 
-                if(_Achromatopsia){
-                    return Achromatopsia(col);
+                if(_Achromatopia){
+                    return Achromatopia(col);
                 }
                 
                 if(_Tritanopia){
