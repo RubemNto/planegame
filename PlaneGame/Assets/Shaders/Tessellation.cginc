@@ -11,6 +11,7 @@ struct TessellationControlPoint
 {
     float4 positionOS : INTERNALTESSPOS;
     float3 normalOS : NORMAL;
+    float3 color : COLOR;
 
     float2 uv : TEXCOORD0;
 };
@@ -23,6 +24,7 @@ TessellationControlPoint tessellationVert(Attributes i)
     o.positionOS = i.positionOS;
     o.normalOS = i.normalOS;
     o.uv = i.uv;
+    o.color = i.color;
     return o;
 }
 
@@ -64,6 +66,7 @@ Varyings domain(TessellationFactors factors, OutputPatch<TessellationControlPoin
     DOMAIN_INTERPOLATE(positionOS);
     DOMAIN_INTERPOLATE(normalOS);
     DOMAIN_INTERPOLATE(uv);
+    DOMAIN_INTERPOLATE(color);
 
     return vert(data);
 }

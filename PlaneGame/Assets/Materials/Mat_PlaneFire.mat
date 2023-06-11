@@ -7,11 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_FireWrapAround
+  m_Name: Mat_PlaneFire
   m_Shader: {fileID: 4800000, guid: 69aa0c7ac51b4d44695112b3b1dc9a58, type: 3}
   m_ValidKeywords:
-  - _MASK_TEXTURE
-  - _TRIPLANAR_OBJECT
+  - _MASK_VERTEXCOLOR
+  - _TRIPLANAR_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -23,7 +23,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: fd2da509c9184604da912e12c99ce6a4, type: 3}
+        m_Texture: {fileID: 2800000, guid: afda97479330bca4aade8eaa08c611a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -34,16 +34,16 @@ Material:
     m_Floats:
     - _ColorMultiplier: 1
     - _CullMode: 0
-    - _DisplacementStrength: 0.2
-    - _FlameHeight: 0.9
-    - _Mask: 0
+    - _DisplacementStrength: 0.3
+    - _FlameHeight: 0.5
+    - _Mask: 1
     - _Posterize: 0
-    - _PosterizeSteps: 5
+    - _PosterizeSteps: 4
     - _ScrollSpeed: 1.5
     - _TessellationUniform: 10
-    - _Triplanar: 1
+    - _Triplanar: 0
     m_Colors:
-    - _BaseColor: {r: 2.9960785, g: 0.83137256, b: 0, a: 1}
+    - _BaseColor: {r: 4.237095, g: 1.1757383, b: 0, a: 1}
     - _ExtraColor: {r: 2.1185474, g: 0, b: 0, a: 1}
     - _UVScale: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

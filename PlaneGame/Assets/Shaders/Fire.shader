@@ -11,6 +11,8 @@ Shader "Custom/Fire"
         //[NoScaleOffset] _VoronoiTex ("Voronoi Texture", 2D) = "white" {}
         //[Power(4)] _VoronoiExponent ("Voronoi Exponent", Range(0.5, 4)) = 1
 
+        [KeywordEnum(Texture, VertexColor)] _Mask ("Displacement Mask Mode", Float) = 0
+
         [KeywordEnum(Off, Object, World)] _Triplanar ("Triplanar Mode", Float) = 0
         _UVScale ("UV Scale", Vector) = (1, 1, 1, 1)
 
@@ -46,6 +48,7 @@ Shader "Custom/Fire"
 
             #pragma shader_feature _POSTERIZE_ON
             #pragma shader_feature _TRIPLANAR_OFF _TRIPLANAR_OBJECT _TRIPLANAR_WORLD
+            #pragma shader_feature _MASK_TEXTURE _MASK_VERTEXCOLOR
 
             #include "UnityCG.cginc"
 
@@ -53,6 +56,7 @@ Shader "Custom/Fire"
             {
                 float4 positionOS : POSITION;
                 float3 normalOS : NORMAL;
+                float3 color : COLOR;
 
                 float2 uv : TEXCOORD0;
             };
@@ -84,11 +88,16 @@ Shader "Custom/Fire"
 
                 float3 pos = mul(unity_ObjectToWorld, i.positionOS).xyz;
 
-                float4 mask = tex2Dlod(_MaskTex, float4(i.uv, 0, 0));
+                #if defined(_MASK_TEXTURE)
+                    float mask = tex2Dlod(_MaskTex, float4(i.uv, 0, 0)).a;
+                #elif defined(_MASK_VERTEXCOLOR)
+                    float mask = i.color.r;
+                #endif
+
                 float3 displacement = tex2Dlod(_NoiseTex, 
                     float4(i.uv.x * _UVScale.x, i.uv.y * _UVScale.y - _Time.y * _ScrollSpeed, 0, 0)).rgb;
                 displacement -= 0.5;
-                displacement *= _DisplacementStrength * mask.a;
+                displacement *= _DisplacementStrength * mask;
                 pos += displacement;
 
                 #if defined(_TRIPLANAR_OBJECT)
@@ -193,7 +202,7 @@ Shader "Custom/Fire"
                 //half voronoi = pow(tex2D(_VoronoiTex, scrollUV).r, _VoronoiExponent);
 
                 half4 distortedMask = tex2D(_MaskTex, float2(i.uv.x + (noise.g - 0.5) * 0.1, i.uv.y * noise.r * _FlameHeight));
-                half4 mask = tex2D(_MaskTex, i.uv);
+                //half4 mask = tex2D(_MaskTex, i.uv);
 
                 noise.r = saturate(distortedMask.r * noise.r * _ColorMultiplier);
 
