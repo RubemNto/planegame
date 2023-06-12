@@ -31,6 +31,11 @@ public class EnemyController : MonoBehaviour
         }
 
         controller.Move(_velocity * Time.deltaTime);
+        transform.position = new Vector3(
+            transform.position.x,
+            0,
+            transform.position.z
+        );
     }
 
 }

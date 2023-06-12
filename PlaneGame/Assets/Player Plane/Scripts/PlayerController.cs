@@ -26,6 +26,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        transform.position = new Vector3(
+            transform.position.x,
+            0,
+            transform.position.z
+        );
+
         _horizontal = Input.GetAxisRaw("Horizontal");
         // _vertical = Input.GetAxisRaw("Vertical");
 
@@ -101,7 +107,6 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(_velocity.x) > 0.05 && Mathf.Abs(_velocity.x) < 0.1) { _velocity = new Vector2(0, _velocity.y); }
             // if (Mathf.Abs(_velocity.y) > 0.05 && Mathf.Abs(_velocity.y) < 0.1) { _velocity = new Vector2(_velocity.x, 0); }
         }
-
 
         controller.Move(_velocity * Time.fixedDeltaTime);
         positionLimiter.Check();
