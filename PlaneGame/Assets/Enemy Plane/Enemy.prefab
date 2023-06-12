@@ -24190,8 +24190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5795564899959747898}
-  maxSpeed: 20
-  acceleration: 8
+  maxSpeed: 10
+  acceleration: 3
 --- !u!114 &-4393631454409703319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24204,7 +24204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab45ad4faa0eb5d18d40697058c1ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 246366614673100342, guid: 50f41596a20ace73a8b8311d948f74bb, type: 3}
+  bullet: {fileID: 246366614673100342, guid: dccccca2213fb057da30fe5de4493c40, type: 3}
   bulletSpawn: {fileID: 5759912332155270220}
   minMaxHorizontalOffset: {x: -0.5, y: 0.5}
   minMaxVerticalOffset: {x: -0.2, y: 0.2}
@@ -24404,6 +24404,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
       propertyPath: m_Name
       value: biplane
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
