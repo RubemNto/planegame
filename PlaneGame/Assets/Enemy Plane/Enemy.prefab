@@ -4891,7 +4891,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -9703,7 +9703,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -14515,7 +14515,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -19327,7 +19327,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -24206,8 +24206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 246366614673100342, guid: dccccca2213fb057da30fe5de4493c40, type: 3}
   bulletSpawn: {fileID: 5759912332155270220}
-  minMaxHorizontalOffset: {x: -0.5, y: 0.5}
-  minMaxVerticalOffset: {x: -0.2, y: 0.2}
+  minMaxHorizontalOffset: {x: 0, y: 0}
+  minMaxVerticalOffset: {x: 0, y: 0}
   timeBetweenShots: 0.5
   shootKey: 0
   canShoot: 1
@@ -24224,8 +24224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d03a8d628fa2f653a46bd94d379e472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
-  startHP: 3
+  _hp: 0
+  maxHP: 10
+  startHP: 10
+  renderers:
+  - {fileID: 5164624026755545226}
 --- !u!1001 &993586570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24407,10 +24410,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
+--- !u!23 &5164624026755545226 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}
+  m_PrefabInstance: {fileID: 5795564898697389070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6334104985741673445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b0aef5f5c994f863c9e8cd2ca67628d3, type: 3}

@@ -11,9 +11,9 @@ struct TessellationControlPoint
 {
     float4 positionOS : INTERNALTESSPOS;
     float3 normalOS : NORMAL;
-    float4 color : COLOR;
 
     float2 uv : TEXCOORD0;
+    float4 color : TEXCOORD1;
 };
 
 float _TessellationUniform;

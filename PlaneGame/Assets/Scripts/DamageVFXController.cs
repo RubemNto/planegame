@@ -16,6 +16,14 @@ public class DamageVFXController : MonoBehaviour
         for (int i = 0; i < m_FireVFXs.Length; i++)
         {
             m_FireMaterials[i] = m_FireVFXs[i].material;
+
+            m_FireVFXs[i].gameObject.SetActive(false);
+        }
+
+        foreach (var smoke in m_SmokeVFXs)
+        {
+            var emissionModule = smoke.emission;
+            emissionModule.rateOverTime = 0;
         }
     }
 
@@ -24,7 +32,7 @@ public class DamageVFXController : MonoBehaviour
         foreach (var smoke in m_SmokeVFXs)
         {
             var emissionModule = smoke.emission;
-            emissionModule.rateOverTimeMultiplier = amount;
+            emissionModule.rateOverTime = amount * 70.0f;
         }
 
         int i = 0;
@@ -35,7 +43,7 @@ public class DamageVFXController : MonoBehaviour
             {
                 fire.SetFloat(m_FlameHeightPropId, flameSize);
 
-                if (m_FireVFXs[i].gameObject.activeInHierarchy)
+                if (!m_FireVFXs[i].gameObject.activeInHierarchy)
                 {
                     m_FireVFXs[i].gameObject.SetActive(true);
                 }

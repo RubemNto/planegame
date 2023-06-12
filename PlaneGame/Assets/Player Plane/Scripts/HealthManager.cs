@@ -47,7 +47,12 @@ public class HealthManager : MonoBehaviour
     {
         _hp = _hp - value < 0 ? 0 : _hp - value;
 
-        m_VFXController.UpdateDamageAmount((float)_hp / maxHP);
+        if (m_VFXController)
+        {
+            float totalDamage = 1 - (float)_hp / maxHP;
+            m_VFXController.UpdateDamageAmount(totalDamage);
+        }
+            
     }
     public void AddHP(int value)
     {
