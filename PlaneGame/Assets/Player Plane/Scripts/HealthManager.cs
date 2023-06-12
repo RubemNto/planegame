@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
+    [SerializeField]
     private int _hp;
 
     public int HP => _hp;
@@ -11,15 +12,27 @@ public class HealthManager : MonoBehaviour
     public int maxHP;
     public int startHP;
 
+    public Renderer[] renderers;
+
     private void Start()
     {
         startHP = startHP > maxHP ? maxHP : startHP;
         startHP = startHP < 0 ? 0 : startHP;
         _hp = startHP;
+
+        foreach (var rend in renderers)
+        {
+            rend.material.SetInt("_Toggle", 0);
+        }
     }
 
     private void Update()
     {
+        for (int i = 0; i < renderers.Length - _hp; i++)
+        {
+            renderers[i].material.SetInt("_Toggle", 1);
+        }
+
         if (_hp <= 0)
         {
             //ADD EXPLOSION
