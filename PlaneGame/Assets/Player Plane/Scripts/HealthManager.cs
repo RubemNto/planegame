@@ -11,8 +11,12 @@ public class HealthManager : MonoBehaviour
     public int maxHP;
     public int startHP;
 
+    private DamageVFXController m_VFXController;
+
     private void Start()
     {
+        m_VFXController = GetComponentInChildren<DamageVFXController>();
+
         startHP = startHP > maxHP ? maxHP : startHP;
         startHP = startHP < 0 ? 0 : startHP;
         _hp = startHP;
@@ -30,6 +34,8 @@ public class HealthManager : MonoBehaviour
     public void TakeHP(int value)
     {
         _hp = _hp - value < 0 ? 0 : _hp - value;
+
+        m_VFXController.UpdateDamageAmount((float)_hp / maxHP);
     }
     public void AddHP(int value)
     {

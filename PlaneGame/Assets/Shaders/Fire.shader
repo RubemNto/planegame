@@ -30,7 +30,7 @@ Shader "Custom/Fire"
 
     SubShader
     {
-        Tags { "Queue" = "Transparent" }
+        Tags { "Queue" = "Transparent+1" }
 
         Pass 
         {
@@ -56,7 +56,7 @@ Shader "Custom/Fire"
             {
                 float4 positionOS : POSITION;
                 float3 normalOS : NORMAL;
-                float3 color : COLOR;
+                float4 color : COLOR;
 
                 float2 uv : TEXCOORD0;
             };
