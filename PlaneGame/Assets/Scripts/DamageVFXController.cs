@@ -32,16 +32,17 @@ public class DamageVFXController : MonoBehaviour
         foreach (var smoke in m_SmokeVFXs)
         {
             var emissionModule = smoke.emission;
-            emissionModule.rateOverTime = amount * 70.0f;
+            emissionModule.rateOverTime = amount * 100.0f;
+            emissionModule.rateOverDistance = amount * 20.0f;
         }
 
         int i = 0;
         foreach (var fire in m_FireMaterials)
         {
-            float flameSize = (1.0f - amount) * 2.0f + 0.5f;
-            if (flameSize < 2.0f)
+            float flameSize = (1.0f - amount) * 2.0f;
+            if (flameSize < 1.5f)
             {
-                fire.SetFloat(m_FlameHeightPropId, flameSize);
+                fire.SetFloat(m_FlameHeightPropId, flameSize < 0.5f ? 0.5f : flameSize);
 
                 if (!m_FireVFXs[i].gameObject.activeInHierarchy)
                 {

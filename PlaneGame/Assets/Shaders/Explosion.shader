@@ -1,4 +1,4 @@
-Shader "Custom/Smoke"
+Shader "Custom/Explosion"
 {
     Properties
     {
@@ -66,7 +66,6 @@ Shader "Custom/Smoke"
             half4 col02 = tex2D(_MainTex, uv);
 
             o.Albedo = volCol.rgb * IN.color.rgb;
-            o.Emission = (dot(o.Normal, -_WorldSpaceLightPos0.xyz) + 1) * 0.5 * volCol.rgb;
             o.Alpha = col.r * col02.a * IN.color.a;
         }
 
