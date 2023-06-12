@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
@@ -40,6 +41,10 @@ public class HealthManager : MonoBehaviour
         {
             //ADD EXPLOSION
             Destroy(gameObject);
+            if (gameObject.tag == "Player")
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
@@ -52,7 +57,7 @@ public class HealthManager : MonoBehaviour
             float totalDamage = 1 - (float)_hp / maxHP;
             m_VFXController.UpdateDamageAmount(totalDamage);
         }
-            
+
     }
     public void AddHP(int value)
     {

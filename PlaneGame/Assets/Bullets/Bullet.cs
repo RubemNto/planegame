@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
         {
+            audioSource.Play();
             var HM = other.gameObject.GetComponent<HealthManager>();
             if (HM.HP > 0)
             {
@@ -15,6 +23,6 @@ public class Bullet : MonoBehaviour
                 //ADD FIRE EFFECT
             }
         }
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 }
