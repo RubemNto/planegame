@@ -8,6 +8,9 @@ public class HealthManager : MonoBehaviour
     [SerializeField]
     private int _hp;
 
+    [SerializeField]
+    private GameObject m_ExplosionVFX;
+
     public int HP => _hp;
 
     public int maxHP;
@@ -15,6 +18,8 @@ public class HealthManager : MonoBehaviour
 
     public Renderer[] renderers;
     private DamageVFXController m_VFXController;
+
+    private bool m_IsDead = false;
 
     private void Start()
     {
@@ -37,14 +42,26 @@ public class HealthManager : MonoBehaviour
             renderers[i].material.SetInt("_Toggle", 1);
         }
 
-        if (_hp <= 0)
+        if (!m_IsDead && _hp <= 0)
         {
             //ADD EXPLOSION
-            Destroy(gameObject);
-            if (gameObject.tag == "Player")
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            m_IsDead = true;
+            StartCoroutine(Explode());
+        }
+    }
+
+    private IEnumerator Explode()
+    {
+        var explosion = Instantiate(m_ExplosionVFX, transform.position, transform.rotation);
+
+        yield return new WaitForSeconds(3.0f);
+
+        Destroy(explosion);
+        Destroy(gameObject);
+
+        if (gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -59,6 +76,7 @@ public class HealthManager : MonoBehaviour
         }
 
     }
+
     public void AddHP(int value)
     {
         _hp = _hp + value > maxHP ? maxHP : _hp + value;

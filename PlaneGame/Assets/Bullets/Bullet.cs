@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public AudioSource audioSource;
 
+    [SerializeField] private GameObject m_MiniExplosionVFX;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -21,8 +23,14 @@ public class Bullet : MonoBehaviour
             {
                 HM.TakeHP(1);
                 //ADD FIRE EFFECT
+
+                var explosion = Instantiate(m_MiniExplosionVFX, transform.position, transform.rotation);
+
+                Destroy(explosion, 1.5f);
+
             }
         }
+
         Destroy(gameObject, 1);
     }
 }

@@ -2,75 +2,90 @@ Shader "Custom/Explosion"
 {
     Properties
     {
-        _MainTex ("Albedo (RGB) Alpha (A)", 2D) = "white" {}
-        _Density ("Density", Range(1, 100)) = 0.5
+        
     }
 
     SubShader
     {
-        Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
+        Tags { "Queue" = "Transparent" }
 
-        CGPROGRAM
-
-        #pragma surface surf Standard fullforwardshadows vertex:vert alpha:fade
-
-        struct Input
+        Pass 
         {
-            float2 uv_MainTex;
-            float3 lightDirTS;
-            float4 color : COLOR;
-        };
 
-        float _Density;
-        sampler2D _MainTex;
+            CGPROGRAM
 
-        void vert(inout appdata_full v, out Input o)
-        {
-            UNITY_INITIALIZE_OUTPUT(Input, o);
+            #pragma vertex vert 
+            #pragma fragment frag
 
-            float3 normalWS = UnityObjectToWorldNormal(v.normal);
-            float3 tangentWS = UnityObjectToWorldDir(v.tangent);
-            float tangentSign = v.tangent.w * unity_WorldTransformParams.w;
-            float3 bitangentWS = cross(normalWS, tangentWS) * tangentSign;
-            o.lightDirTS = float3(
-                dot(_WorldSpaceLightPos0.xyz, tangentWS),
-                dot(_WorldSpaceLightPos0.xyz, bitangentWS),
-                dot(_WorldSpaceLightPos0.xyz, normalWS)
-            );
-        }
+            #include "UnityCG.cginc"
 
-        half3 RayMarch2D(sampler2D tex, float2 uv, float maxDist, float2 marchDir, int steps, half3 lightCol, float density)
-        {
-            float stepLength = maxDist / steps;
-            float2 stepOffset = stepLength * marchDir;
-
-            float transmittance = 1;
-            for (int i = 0; i < steps; i++)
+            struct Attributes
             {
-                float deltaDensity = tex2D(tex, uv).a * density;
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
 
-                transmittance *= exp(-deltaDensity * stepLength);
+                half4 baseColor : TEXCOORD0;
+                half4 rimColor : TEXCOORD1;
+            };
 
-                uv += stepOffset;
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+
+                half4 baseColor : TEXCOORD0;
+                half4 rimColor : TEXCOORD1;
+                float3 normalWS : TEXCOORD2;
+                float3 viewDir : TEXCOORD3;
+                float4 positionSS : TEXCOORD4;
+                float3 camRelativeWorldPos : TEXCOORD5;
+                float3 positionWS : TEXCOORD6;
+            };
+
+            uniform sampler2D _CameraDepthTexture;
+
+            Varyings vert(Attributes i)
+            {
+                Varyings o = (Varyings)0;
+
+                o.baseColor = i.baseColor;
+                o.rimColor = i.rimColor;
+
+                o.normalWS = UnityObjectToWorldNormal(i.normalOS);
+
+                o.positionWS = mul(unity_ObjectToWorld, i.positionOS).xyz;
+                o.viewDir = normalize(_WorldSpaceCameraPos.xyz - o.positionWS);
+
+                o.camRelativeWorldPos = o.positionWS - _WorldSpaceCameraPos;
+
+                o.positionSS = ComputeScreenPos(i.positionOS);
+
+                o.positionCS = UnityObjectToClipPos(i.positionOS);
+
+                return o;
             }
 
-            return lightCol * transmittance;
+            float Fresnel(float3 normal, float3 viewDir, float exponent)
+            {
+                return pow(saturate(1 - dot(normal, viewDir)), exponent);
+            }
+
+            half4 frag(Varyings i) : SV_TARGET
+            {
+                float2 screenUV = i.positionSS.xy / i.positionSS.w;
+
+                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, screenUV);
+                depth = Linear01Depth(depth);
+
+                float depthDiff = saturate(1 - (depth - i.positionCS.z) * 0.1);
+
+                float fresnel = Fresnel(i.normalWS, i.viewDir, 2);
+                half4 col = i.baseColor + i.rimColor * fresnel + i.rimColor * depthDiff;
+
+                return col;
+            }
+
+            ENDCG
+
         }
-
-        void surf(Input IN, inout SurfaceOutputStandard o)
-        {
-            float2 uv = IN.uv_MainTex + float2(0, -_Time.y * 0.5);
-            half3 volCol = RayMarch2D(_MainTex, uv, 0.05, IN.lightDirTS.xy, 5, _LightColor0.rgb, _Density);
-
-            half4 col = tex2D(_MainTex, IN.uv_MainTex);
-            half4 col02 = tex2D(_MainTex, uv);
-
-            o.Albedo = volCol.rgb * IN.color.rgb;
-            o.Alpha = col.r * col02.a * IN.color.a;
-        }
-
-        ENDCG
     }
-
-    FallBack "Diffuse"
 }

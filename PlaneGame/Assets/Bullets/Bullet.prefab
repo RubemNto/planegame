@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cc13a165571f9448e7ecc601e9e816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  m_MiniExplosionVFX: {fileID: 1805235196943238002, guid: 99aef4f97d6354d4a9144fd1bb025cae, type: 3}
 --- !u!65 &4694406714524350856
 BoxCollider:
   m_ObjectHideFlags: 0

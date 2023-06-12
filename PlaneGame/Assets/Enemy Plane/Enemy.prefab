@@ -24225,6 +24225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
+  m_ExplosionVFX: {fileID: 1805235196943238002, guid: 4336217735c5aaa4688033ac687adce8, type: 3}
   maxHP: 5
   startHP: 5
   renderers:
