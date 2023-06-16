@@ -10,8 +10,7 @@ Material:
   m_Name: ColorBlindness
   m_Shader: {fileID: 4800000, guid: 123c61d78955ac841b8a532686fbbf22, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DEUTERANOPIA_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

@@ -34,13 +34,13 @@ Material:
     m_Floats:
     - _ColorMultiplier: 1
     - _CullMode: 0
-    - _DisplacementStrength: 0.3
+    - _DisplacementStrength: 0.373
     - _FlameHeight: 0.5
     - _Mask: 1
     - _Posterize: 0
     - _PosterizeSteps: 4
     - _ScrollSpeed: 1.5
-    - _TessellationUniform: 10
+    - _TessellationUniform: 64
     - _Triplanar: 0
     m_Colors:
     - _BaseColor: {r: 5.992157, g: 1.6627451, b: 0, a: 1}

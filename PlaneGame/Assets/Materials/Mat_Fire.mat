@@ -34,7 +34,7 @@ Material:
     m_Floats:
     - _ColorMultiplier: 1
     - _CullMode: 0
-    - _DisplacementStrength: 0.2
+    - _DisplacementStrength: 0
     - _FlameHeight: 0.9
     - _Mask: 0
     - _Posterize: 0
